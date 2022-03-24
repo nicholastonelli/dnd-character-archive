@@ -1,6 +1,9 @@
-const CharacterSheet = () => {
+const CharacterSheet = ({ character }) => {
+  console.log(character)
   return (
-    <div>CharacterSheet</div>
+    <div>
+      <h1>character</h1>
+    </div>
   )
 }
 

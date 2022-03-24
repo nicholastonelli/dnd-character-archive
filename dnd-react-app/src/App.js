@@ -9,7 +9,7 @@ function App() {
   const [characters, setCharacters] = useState([])
 
   function getData() {
-    axios.get(`${process.env.REACT_APP_backendURI}posts`).then((res) => {
+    axios.get(`${process.env.REACT_APP_backendURI}/characters`).then((res) => {
       setCharacters(res.data)
     })
   }
@@ -23,7 +23,6 @@ function App() {
       <Navbar />
       <CharacterSheets characters={characters} />
       <CharacterSheet />
-      dnd character application
     </div>
   )
 }
