@@ -1,0 +1,15 @@
+ul {
+    list-style-type: none;
+    display: inline;
+}
+
+li {
+    display: inline;
+    float: left;
+    padding-left: 1%;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,45 @@
+div {
+  background-color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.mainBody {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.infobar {
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr;
+}
+
+.abilityScores {
+    display: flex;
+    flex-direction: column;
+}
+
+.proficiency {
+    display: flex;
+}
+
+.throws {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    border: 0;
+    font-size: 16px;
+}
