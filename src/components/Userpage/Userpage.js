@@ -1,16 +1,30 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import Statblock from "../Statblock/Statblock"
 
 const Userpage = ({ setFoundUser, foundUser, users }) => {
   const params = useParams()
 
-  async function getUser() {
-    await axios
+  const [userChars, setUserChars] = useState([])
+
+  function getUser() {
+    axios
       .get(`${process.env.REACT_APP_backendURI}/users/${params.userId}`)
       .then((res) => {
-        console.log(res)
+        //console.log(res)
         setFoundUser(res.data)
+      })
+  }
+
+  function getChars() {
+    axios
+      .get(
+        `${process.env.REACT_APP_backendURI}/characters/user/${params.userId}`
+      )
+      .then((res) => {
+        console.log(res.data)
+        setUserChars(res.data)
       })
   }
 
@@ -18,12 +32,28 @@ const Userpage = ({ setFoundUser, foundUser, users }) => {
     getUser()
   }, [])
 
+  useEffect(() => {
+    getChars()
+  }, [])
+
+  console.log(foundUser)
 
   return (
     <div>
-      <h1>{foundUser.username}</h1>
+      {foundUser ? <h1>{foundUser.username}</h1> : <p>loading</p>}
+
       <div>
         <p>Created Characters</p>
+        {userChars.map((character) => {
+          return (
+            <Statblock
+              character={character}
+              foundUser={foundUser}
+              //getChars={getChars}
+              setUserChars={setUserChars}
+            />
+          )
+        })}
       </div>
     </div>
   )

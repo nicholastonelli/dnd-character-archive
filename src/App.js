@@ -12,6 +12,7 @@ import Login from "./components/Login/Login"
 import Homepage from "./components/Homepage/Homepage"
 import Userpage from "./components/Userpage/Userpage"
 import Register from "./components/Register/Register"
+import New from "./components/New/New"
 
 function App() {
   const [characters, setCharacters] = useState([])
@@ -44,7 +45,7 @@ function App() {
   }
 
   let addUsers = (user) => {
-	  setUsers([...users,user])
+    setUsers([...users, user])
   }
 
   return (
@@ -52,17 +53,19 @@ function App() {
       className="App"
       style={{
         backgroundImage: `url(${background})`,
-        backgroundSize:'cover',
+        backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        width: '100vw',
-        height: '100vh'
-        
+        width: "100vw",
+        height: "100vh",
       }}
     >
-      <Navbar user={user}/>
+      <Navbar user={user} />
       <Routes>
-        <Route path="/" element={<Homepage/>}/>
-        <Route path="/characters" element={<CharacterSheets characters={characters} />}/>
+        <Route path="/" element={<Homepage />} />
+        <Route
+          path="/characters"
+          element={<CharacterSheets characters={characters} />}
+        />
         <Route
           path="/login"
           element={
@@ -73,10 +76,18 @@ function App() {
             )
           }
         />
-        <Route path="/user/:userId" element={<Userpage setFoundUser={setFoundUser}
+        <Route
+          path="/user/:userId"
+          element={
+            <Userpage
+              setFoundUser={setFoundUser}
               foundUser={foundUser}
-              users={users}/>}/>
-        <Route path="/register" element={<Register addUsers={addUsers}/>}/>
+              users={users}
+            />
+          }
+        />
+        <Route path="/register" element={<Register addUsers={addUsers} />} />
+        <Route path="/new" element={<New user={user} />} />
       </Routes>
       <Chatbar />
     </div>

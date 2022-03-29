@@ -2,9 +2,13 @@ import { useEffect, useState } from "react"
 import "./CharacterSheet.css"
 
 const CharacterSheet = ({ character }) => {
+  
+
   const [level, setLevel] = useState(character.level)
   const [prof, setProf] = useState(Math.floor(2 + (level - 1) / 4))
   const [insp, setInsp] = useState(character.inspiration)
+
+
 
   // Set Ability Scores and Mods as State
   const [str, setStr] = useState(character.abilities.str)
