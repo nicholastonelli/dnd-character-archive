@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router"
 import axios from "axios"
-import Statblock from "../Statblock/Statblock"
+
 import Homepage from "../Homepage/Homepage"
+import Statblock from "../Statblock/Statblock"
 
 const BaseCharacterStaging = () => {
   const [foundCharacter, setFoundCharacter] = useState()
@@ -18,13 +19,13 @@ const BaseCharacterStaging = () => {
 
   useEffect(() => {
     getCharacter()
-  })
+  }, [])
 
   console.log(foundCharacter)
   if (foundCharacter) {
     return (
       <div>
-          <h1>{foundCharacter.name}</h1>
+         <Statblock character={foundCharacter}/>
       </div>
     )
   } else {
