@@ -25,7 +25,7 @@ const BaseCharacterStaging = () => {
   if (foundCharacter) {
     return (
       <div>
-         <Statblock character={foundCharacter}/>
+        <h1>{foundCharacter.name}</h1>
       </div>
     )
   } else {
