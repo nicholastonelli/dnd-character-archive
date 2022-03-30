@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 
-const CharacterForm = ({ user }) => {
+const CharacterForm = ({ user, setBaseCharacters, baseCharacters }) => {
   const navigate = useNavigate()
 
   const initialState = {
@@ -30,8 +30,6 @@ const CharacterForm = ({ user }) => {
     const [intMod, setIntMod] = useState() 
     const [wisMod, setWisMod] = useState() 
     const [chaMod, setChaMod] = useState() 
-  
-
   
 
   let handleSubmit = async (e) => {
@@ -67,7 +65,41 @@ const CharacterForm = ({ user }) => {
       }
     )
     let character = await response.json()
-    console.log(character)
+    let baseResponse = await fetch(
+      `${process.env.REACT_APP_backendURI}/baseCharacters`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: formState.name,
+          class: formState.class,
+          level: formState.level,
+          subclass: formState.subclass,
+          race: formState.race,
+          alignment: formState.alignment,
+          experiencePoints: formState.experiencePoints,
+          background: formState.background,
+          abilities: {
+            str: formState.str,
+            dex: formState.dex,
+            con: formState.con,
+            int: formState.int,
+            wis: formState.wis,
+            cha: formState.cha,
+          },
+          userId: user._id,
+          user: user,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    let baseCharacter = await baseResponse.json()
+    //console.log(character)
+    console.log(baseCharacter)
+    console.log(baseCharacters)
+    setBaseCharacters(...baseCharacters, baseCharacter)
+    console.log(baseCharacters)
     setFormState("")
     navigate("/")
   }
@@ -82,6 +114,21 @@ const CharacterForm = ({ user }) => {
   useEffect(()=>{
     setStrMod(Math.floor((formState.str-10)/2))
   }, [formState.str])
+  useEffect(()=>{
+    setDexMod(Math.floor((formState.dex-10)/2))
+  }, [formState.dex])
+  useEffect(()=>{
+    setConMod(Math.floor((formState.con-10)/2))
+  }, [formState.con])
+  useEffect(()=>{
+    setIntMod(Math.floor((formState.int-10)/2))
+  }, [formState.int])
+  useEffect(()=>{
+    setWisMod(Math.floor((formState.wis-10)/2))
+  }, [formState.wis])
+  useEffect(()=>{
+    setChaMod(Math.floor((formState.cha-10)/2))
+  }, [formState.cha])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -133,7 +180,7 @@ const CharacterForm = ({ user }) => {
         />
       </div>
       <div className="abilities">
-        <div>
+        <div className="strScore">
           <label for="str">Strength</label>
           <input
             id="str"
@@ -141,7 +188,57 @@ const CharacterForm = ({ user }) => {
             onChange={handleChange}
             defaultValue={formState.str}
           />
-          <p>+ {strMod}</p>
+          <p>{(strMod >= 0 ? "+" : "")}{strMod}</p>
+        </div>
+        <div className="dexScore">
+          <label for="dex">Dexterity</label>
+          <input
+            id="dex"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.dex}
+          />
+          <p>{(dexMod >= 0 ? "+" : "")}{dexMod}</p>
+        </div>
+        <div className="conScore">
+          <label for="con">Constitution</label>
+          <input
+            id="con"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.con}
+          />
+          <p>{(conMod >= 0 ? "+" : "")}{conMod}</p>
+        </div>
+        <div className="intScore">
+          <label for="int">Intelligence</label>
+          <input
+            id="int"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.int}
+          />
+          <p>{(intMod >= 0 ? "+" : "")}{intMod}</p>
+        </div>
+        <div className="wisScore">
+          <label for="wis">Wisdom</label>
+          <input
+            id="wis"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.wis}
+          />
+          <p>{(wisMod >= 0 ? "+" : "")}{wisMod}</p>
+        </div>
+        <div className="chaScore">
+          <label for="cha">Charisma</label>
+          <input
+            id="cha"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.cha}
+          />
+          <p>{(chaMod >= 0 ? "+" : "")}{chaMod}</p>
         </div>
       </div>
       <button type="submit" value="POST">

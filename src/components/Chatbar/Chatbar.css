@@ -1,0 +1,7 @@
+.chatbar {
+    display: flex;
+    flex-direction: column;
+    border: brown;
+    border-style: double;
+    border-radius: 5%;
+}

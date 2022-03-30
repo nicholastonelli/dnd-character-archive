@@ -52,7 +52,7 @@ const Login = ({ setUser, login, message }) => {
   return (
     <div className="login-body">
       <div className="main">
-        <input type="checkbox" id="chk" aria-hidden="true" />
+        {/* <input type="checkbox" id="chk" aria-hidden="true" /> */}
 
        {/*  <Signup addUsers={addUsers} />
  */}
@@ -63,7 +63,7 @@ const Login = ({ setUser, login, message }) => {
             </label>
             <p className="spaceLogin">{message}</p>
           {/*   <Google /> */}
-            <h2 className="or">OR</h2>
+            {/* <h2 className="or">OR</h2> */}
             <input
               type="username"
               id="usernameToLogIn"

@@ -1,8 +1,13 @@
 import React from 'react'
+import Chatbox from '../Chatbox/Chatbox'
+import './Chatbar.css'
 
-const Chatbar = () => {
+const Chatbar = ({rollBonus, setRollBonus, rollDice, chatState, setChatState}) => {
   return (
-    <div>Chatbar</div>
+    <div className="chatbar">
+      <p>Chatbar</p>
+        <Chatbox />
+    </div>
   )
 }
 

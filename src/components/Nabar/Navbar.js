@@ -17,7 +17,7 @@ const Navbar = ({ user }) => {
           <Link to="/new">
             <li>Build a New Character</li>
           </Link>
-          <div class="userNav">
+        
             <li>
               {user && user.username !== undefined ? (
                 <Link to={`/user/${user._id}`}>
@@ -41,7 +41,7 @@ const Navbar = ({ user }) => {
                 </Link>
               )}
             </li>
-          </div>
+         
         </ul>
       </nav>
     </div>
