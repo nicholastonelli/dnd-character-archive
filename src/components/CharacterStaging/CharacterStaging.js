@@ -5,11 +5,14 @@ import Fullpage from "../Fullpage/Fullpage"
 import { Navigate, useNavigate } from "react-router-dom"
 import UploadImage from "../UploadImage/UploadImage"
 
+import './CharacterStaging.css'
+
 // The Character Staging Component uses Params to find a character before passing to another component
 
 const CharacterStaging = ({ user }) => {
   const navigate = useNavigate()
   const [foundCharacter, setFoundCharacter] = useState()
+  const [uploadedImageUrl, setUploadedImageUrl] = useState()
 
   const initialState = {
     name: "",
@@ -19,20 +22,10 @@ const CharacterStaging = ({ user }) => {
     subclass: "",
     experiencePoints: "",
     background: "",
-    alignment: "",
-    image: "",
+    alignment: ""
   }
 
-  const initialAbility = {
-    str: 0,
-    dex: 0,
-    con: 0,
-    int: 0,
-    wis: 0,
-    cha: 0
-  }
 
-  const [formAbility, setFormAbility] = useState(initialAbility)
   const [formState, setFormState] = useState(initialState)
   let id = useParams()
 
@@ -41,18 +34,45 @@ const CharacterStaging = ({ user }) => {
       .get(`${process.env.REACT_APP_backendURI}/characters/${id.id}`)
       .then((res) => {
         setFoundCharacter(res.data)
-        console.log(res.data.abilities)
       })
   }
 
-  function saveCharacter() {
+  async function saveCharacter() {
     console.log("Saving Character")
-    axios
-      .put(`${process.env.REACT_APP_backendURI}/characters/${id.id}`, formState)
-      .then((res) => {
-        //console.log(res)
-      })
-    navigate("/")
+    console.log(uploadedImageUrl)
+    console.log(formState)
+    let response = await fetch(
+      `${process.env.REACT_APP_backendURI}/characters/${id.id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          name: formState.name,
+          class: formState.class,
+          level: formState.level,
+          subclass: formState.subclass,
+          race: formState.race,
+          alignment: formState.alignment,
+          experiencePoints: formState.experiencePoints,
+          background: formState.background,
+          abilities: {
+            str: formState.str,
+            dex: formState.dex,
+            con: formState.con,
+            int: formState.int,
+            wis: formState.wis,
+            cha: formState.cha,
+          },
+          userId: user._id,
+          user: user,
+          image: uploadedImageUrl,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    let character = await response.json()
+    //navigate("/")
   }
 
   useEffect(() => {
@@ -63,20 +83,21 @@ const CharacterStaging = ({ user }) => {
   if (foundCharacter) {
     return (
       <div>
-        {foundCharacter.image 
-        ? <div className="image">Hey there's an image on this</div> 
-        : null
-        }
+        {foundCharacter.image ? (
+          <img src={foundCharacter.image} className="portrait" alt={foundCharacter.name}/>
+        ) : null}
         <Fullpage
           character={foundCharacter}
           formState={formState}
           setFormState={setFormState}
-          formAbility={formAbility}
-          setFormAbility={setFormAbility}
         />
-        <UploadImage character={foundCharacter}
+        <UploadImage
+          character={foundCharacter}
           formState={formState}
-          setFormState={setFormState}/>
+          setFormState={setFormState}
+          uploadedImageUrl={uploadedImageUrl}
+          setUploadedImageUrl={setUploadedImageUrl}
+        />
         <button onClick={saveCharacter}>Save Changes</button>
       </div>
     )

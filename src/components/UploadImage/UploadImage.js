@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 
-const UploadImage = ({ character, formState, setFormState }) => {
+const UploadImage = ({ character, formState, setFormState, uploadedImageUrl, setUploadedImageUrl }) => {
 
-  const [uploadedImageUrl, setUploadedImageUrl] = useState("")
   const [previewSource, setPreviewSource] = useState("")
   const [fileInputState, setFileInputState] = useState("")
   const [selectedFile, setSelectedFile] = useState("")
@@ -44,8 +43,6 @@ const UploadImage = ({ character, formState, setFormState }) => {
     const resJson = await response.json()
     console.log(resJson.secure_url)
     setUploadedImageUrl(resJson.secure_url)
-    setFormState(uploadedImageUrl)
-    console.log(uploadedImageUrl)
   }
 
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const Fullpage = ({ character, formState, setFormState, formAbility, setFormAbility }) => {
+const Fullpage = ({ character, formState, setFormState }) => {
   //console.log(character)
   //console.log(formState)
 
@@ -34,9 +34,37 @@ const Fullpage = ({ character, formState, setFormState, formAbility, setFormAbil
     console.log(formState)
   }
 
+ /*  const [strMod, setStrMod] = useState()
+  const [dexMod, setDexMod] = useState()
+  const [conMod, setConMod] = useState()
+  const [intMod, setIntMod] = useState()
+  const [wisMod, setWisMod] = useState()
+  const [chaMod, setChaMod] = useState() */
+
+
   useEffect(() => {
     setFormState(characterState)
   }, [])
+
+/*   useEffect(() => {
+    setStrMod(Math.floor((formState.str - 10) / 2))
+  }, [formState.str])
+  useEffect(() => {
+    setDexMod(Math.floor((formState.dex - 10) / 2))
+  }, [formState.dex])
+  useEffect(() => {
+    setConMod(Math.floor((formState.con - 10) / 2))
+  }, [formState.con])
+  useEffect(() => {
+    setIntMod(Math.floor((formState.int - 10) / 2))
+  }, [formState.int])
+  useEffect(() => {
+    setWisMod(Math.floor((formState.wis - 10) / 2))
+  }, [formState.wis])
+  useEffect(() => {
+    setChaMod(Math.floor((formState.cha - 10) / 2))
+  }, [formState.cha])
+ */
 
   return (
     <div>
@@ -114,8 +142,12 @@ const Fullpage = ({ character, formState, setFormState, formAbility, setFormAbil
             id="str"
             type="number"
             onChange={handleChange}
-            defaultValue={formAbility.str}
+            defaultValue={formState.str}
           />
+          {/* <p>
+            {strMod >= 0 ? "+" : ""}
+            {strMod}
+          </p> */}
         </div>
         <div className="dex">
           <label for="dex">DEX: </label>
@@ -123,8 +155,12 @@ const Fullpage = ({ character, formState, setFormState, formAbility, setFormAbil
             id="dex"
             type="number"
             onChange={handleChange}
-            defaultValue={formAbility.dex}
+            defaultValue={formState.dex}
           />
+          {/* <p>
+            {dexMod >= 0 ? "+" : ""}
+            {dexMod}
+          </p> */}
         </div>
       </div>
     </div>
