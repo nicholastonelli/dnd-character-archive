@@ -63,6 +63,107 @@ const CharacterStaging = ({ user }) => {
             cha: formState.cha,
           },
           inspiration: formState.inspiration,
+          savingThrows: {
+            str: formState.strSave,
+            dex: formState.dexSave,
+            con: formState.conSave,
+            int: formState.intSave,
+            wis: formState.wisSave,
+            cha: formState.chaSave
+          },
+          skills: {
+            acrobatics: {
+              proficiency: formState.acrobaticsProf,
+              expertise: formState.acrobaticsExpe,
+              misc: formState.acrobaticsMisc
+            },
+            animalHandling: {
+              proficiency: formState.animalHandlingProf,
+              expertise: formState.animalHandlingExpe,
+              misc: formState.animalHandlingMisc
+            },
+            arcana: {
+              proficiency: formState.arcanaProf,
+              expertise: formState.arcanaExpe,
+              misc: formState.arcanaMisc
+            },
+            athletics: {
+              proficiency: formState.athleticsProf,
+              expertise: formState.athleticsExpe,
+              misc: formState.athleticsMisc
+            },
+            deception: {
+              proficiency: formState.deceptionProf,
+              expertise: formState.deceptionExpe,
+              misc: formState.deceptionMisc
+            },
+            history: {
+              proficiency: formState.historyProf,
+              expertise: formState.historyExpe,
+              misc: formState.historyMisc
+            },
+            insight: {
+              proficiency: formState.insightProf,
+              expertise: formState.insightExpe,
+              misc: formState.insightMisc
+            },
+            intimidation: {
+              proficiency: formState.intimidationProf,
+              expertise: formState.intimidationExpe,
+              misc: formState.intimidationMisc
+            },
+            investigation: {
+              proficiency: formState.investigationProf,
+              expertise: formState.investigationExpe,
+              misc: formState.investigationMisc
+            },
+            medicine: {
+              proficiency: formState.medicineProf,
+              expertise: formState.medicineExpe,
+              misc: formState.medicineMisc
+            },
+            nature: {
+              proficiency: formState.natureProf,
+              expertise: formState.natureExpe,
+              misc: formState.natureMisc
+            },
+            perception: {
+              proficiency: formState.perceptionProf,
+              expertise: formState.perceptionExpe,
+              misc: formState.perceptionMisc
+            },
+            performance: {
+              proficiency: formState.performanceProf,
+              expertise: formState.performanceExpe,
+              misc: formState.performanceMisc
+            },
+            persuasion: {
+              proficiency: formState.persuasionProf,
+              expertise: formState.persuasionExpe,
+              misc: formState.persuasionMisc
+            },
+            religion: {
+              proficiency: formState.religionProf,
+              expertise: formState.religionExpe,
+              misc: formState.religionMisc
+            },
+            sleightOfHand: {
+              proficiency: formState.sleightOfHandProf,
+              expertise: formState.sleightOfHandExpe,
+              misc: formState.sleightOfHandMisc
+            },
+            stealth: {
+              proficiency: formState.stealthProf,
+              expertise: formState.stealthExpe,
+              misc: formState.stealthMisc
+            },
+            survival: {
+              proficiency: formState.survivalProf,
+              expertise: formState.survivalExpe,
+              misc: formState.survivalMisc
+            },
+            
+          },
           userId: user._id,
           user: user,
           image: uploadedImageUrl,

@@ -1,6 +1,6 @@
 .abilitiesBar {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* .abilitiesBar > div {
@@ -8,3 +8,12 @@
  flex-direction: row;
  background-color: lightgray;
 } */
+
+.columns {
+  display: flex;
+  flex-direction: row;
+}
+
+input {
+  size: 5;
+}
