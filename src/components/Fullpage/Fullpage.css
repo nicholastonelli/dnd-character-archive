@@ -1,0 +1,10 @@
+.abilitiesBar {
+    display: flex;
+    flex-direction: column;
+}
+
+/* .abilitiesBar > div {
+ display: flex;
+ flex-direction: row;
+ background-color: lightgray;
+} */

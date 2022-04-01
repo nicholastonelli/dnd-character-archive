@@ -22,7 +22,8 @@ const CharacterStaging = ({ user }) => {
     subclass: "",
     experiencePoints: "",
     background: "",
-    alignment: ""
+    alignment: "",
+
   }
 
 
@@ -39,7 +40,6 @@ const CharacterStaging = ({ user }) => {
 
   async function saveCharacter() {
     console.log("Saving Character")
-    console.log(uploadedImageUrl)
     console.log(formState)
     let response = await fetch(
       `${process.env.REACT_APP_backendURI}/characters/${id.id}`,
@@ -62,6 +62,7 @@ const CharacterStaging = ({ user }) => {
             wis: formState.wis,
             cha: formState.cha,
           },
+          inspiration: formState.inspiration,
           userId: user._id,
           user: user,
           image: uploadedImageUrl,
@@ -79,7 +80,7 @@ const CharacterStaging = ({ user }) => {
     getCharacter()
   }, [])
 
-  console.log(foundCharacter)
+  //console.log(foundCharacter)
   if (foundCharacter) {
     return (
       <div>

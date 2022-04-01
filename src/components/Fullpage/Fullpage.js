@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import { useSearchParams } from "react-router-dom"
+import "./Fullpage.css"
 
 const Fullpage = ({ character, formState, setFormState }) => {
   //console.log(character)
@@ -19,34 +21,42 @@ const Fullpage = ({ character, formState, setFormState }) => {
     int: character.abilities.int,
     wis: character.abilities.wis,
     cha: character.abilities.cha,
+    inspiration: character.inspiration
   }
 
   const handleChange = (event) => {
+    console.log("New CLick!")
+    console.log(event.target.checked)
     if (event.target.type === "number") {
       setFormState({
         ...formState,
         [event.target.id]: parseInt(event.target.value),
       })
-    } else {
+    } else if (event.target.type === "text") {
       setFormState({ ...formState, [event.target.id]: event.target.value })
+    } else if (event.target.type === "checkbox") {
+      setFormState({ ...formState, [event.target.id]: (event.target.checked !== false) })
     }
-    console.log(event.target)
-    console.log(formState)
+    console.log(formState.inspiration)
+    console.log(event.target.checked)
   }
 
- /*  const [strMod, setStrMod] = useState()
+  const [profMod, setProfMod] = useState()
+  const [strMod, setStrMod] = useState()
   const [dexMod, setDexMod] = useState()
   const [conMod, setConMod] = useState()
   const [intMod, setIntMod] = useState()
   const [wisMod, setWisMod] = useState()
-  const [chaMod, setChaMod] = useState() */
-
+  const [chaMod, setChaMod] = useState()
 
   useEffect(() => {
     setFormState(characterState)
   }, [])
 
-/*   useEffect(() => {
+  useEffect(() => {
+    setProfMod(Math.floor(2 + (formState.level - 1) / 4))
+  }, [formState.level])
+  useEffect(() => {
     setStrMod(Math.floor((formState.str - 10) / 2))
   }, [formState.str])
   useEffect(() => {
@@ -64,7 +74,6 @@ const Fullpage = ({ character, formState, setFormState }) => {
   useEffect(() => {
     setChaMod(Math.floor((formState.cha - 10) / 2))
   }, [formState.cha])
- */
 
   return (
     <div>
@@ -87,6 +96,7 @@ const Fullpage = ({ character, formState, setFormState }) => {
             onChange={handleChange}
             defaultValue={formState.level}
           />
+          <p>Proficiency Modifier: + {profMod}</p>
         </div>
         <div className="class">
           <label for="class">Class: </label>
@@ -134,7 +144,7 @@ const Fullpage = ({ character, formState, setFormState }) => {
           />
         </div>
       </div>
-      <div className="abilities">
+      <div className="abilitiesBar">
         <p>Abilities</p>
         <div className="str">
           <label for="level">STR: </label>
@@ -144,10 +154,10 @@ const Fullpage = ({ character, formState, setFormState }) => {
             onChange={handleChange}
             defaultValue={formState.str}
           />
-          {/* <p>
+          <p>
             {strMod >= 0 ? "+" : ""}
             {strMod}
-          </p> */}
+          </p>
         </div>
         <div className="dex">
           <label for="dex">DEX: </label>
@@ -157,11 +167,72 @@ const Fullpage = ({ character, formState, setFormState }) => {
             onChange={handleChange}
             defaultValue={formState.dex}
           />
-          {/* <p>
+          <p>
             {dexMod >= 0 ? "+" : ""}
             {dexMod}
-          </p> */}
+          </p>
         </div>
+        <div className="con">
+          <label for="con">CON: </label>
+          <input
+            id="con"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.con}
+          />
+          <p>
+            {conMod >= 0 ? "+" : ""}
+            {conMod}
+          </p>
+        </div>
+        <div className="int">
+          <label for="int">INT: </label>
+          <input
+            id="int"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.int}
+          />
+          <p>
+            {intMod >= 0 ? "+" : ""}
+            {intMod}
+          </p>
+        </div>
+        <div className="wis">
+          <label for="wis">WIS: </label>
+          <input
+            id="wis"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.wis}
+          />
+          <p>
+            {wisMod >= 0 ? "+" : ""}
+            {wisMod}
+          </p>
+        </div>
+        <div className="cha">
+          <label for="cha">CHA: </label>
+          <input
+            id="cha"
+            type="number"
+            onChange={handleChange}
+            defaultValue={formState.cha}
+          />
+          <p>
+            {chaMod >= 0 ? "+" : ""}
+            {chaMod}
+          </p>
+        </div>
+      </div>
+      <div className="inspBar">
+        <p>Inspiration</p>
+        <input
+          id="inspiration"
+          type="checkbox"
+          onChange={handleChange}
+          defaultChecked={formState.inspiration}
+        />
       </div>
     </div>
   )

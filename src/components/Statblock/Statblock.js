@@ -25,8 +25,6 @@ const Statblock = ({ character, foundUser, rollDice, rollBonus }) => {
     setAbilities(character.abilities)
   }, [])
 
-  console.log(abilities)
-
   return (
     <div>
       <Link to={`/characters/${character._id}`}>
