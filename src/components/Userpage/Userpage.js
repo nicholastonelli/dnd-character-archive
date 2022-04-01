@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 import Statblock from "../Statblock/Statblock"
 
-const Userpage = ({ setFoundUser, foundUser, users }) => {
+const Userpage = ({ setFoundUser, foundUser, users, rollBonus, rollDice }) => {
   const params = useParams()
-
   const [userChars, setUserChars] = useState([])
 
   function getUser() {
@@ -23,7 +22,7 @@ const Userpage = ({ setFoundUser, foundUser, users }) => {
         `${process.env.REACT_APP_backendURI}/characters/user/${params.userId}`
       )
       .then((res) => {
-        console.log(res.data)
+        //console.log(res.data)
         setUserChars(res.data)
       })
   }
@@ -35,8 +34,6 @@ const Userpage = ({ setFoundUser, foundUser, users }) => {
   useEffect(() => {
     getChars()
   }, [])
-
-  console.log(foundUser)
 
   return (
     <div>
@@ -51,6 +48,8 @@ const Userpage = ({ setFoundUser, foundUser, users }) => {
               foundUser={foundUser}
               //getChars={getChars}
               setUserChars={setUserChars}
+              rollDice={rollDice}
+              rollBonus={rollBonus}
             />
           )
         })}

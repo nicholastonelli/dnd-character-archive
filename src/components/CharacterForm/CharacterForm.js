@@ -95,20 +95,13 @@ const CharacterForm = ({ user, setBaseCharacters, baseCharacters }) => {
       }
     )
     let baseCharacter = await baseResponse.json()
-    //console.log(character)
-    console.log(baseCharacter)
-    console.log(baseCharacters)
     setBaseCharacters(...baseCharacters, baseCharacter)
-    console.log(baseCharacters)
     setFormState("")
     navigate("/")
   }
 
   const handleChange = (event) => {
     setFormState({ ...formState, [event.target.id]: event.target.value })
-    
-    console.log(event.target)
-    console.log(formState)
   }
 
   useEffect(()=>{

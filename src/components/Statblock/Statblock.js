@@ -1,15 +1,18 @@
 import React, { useState } from "react"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import "./Statblock.css"
 import axios from "axios"
 import AbilitiesStatblock from "../AbilitiesStatblock/AbilitiesStatblock"
 import { useEffect } from "react/cjs/react.development"
 import StatblockAC from "../StatblockAC/StatblockAC"
 
-const Statblock = ({ character, foundUser }) => {
+const Statblock = ({ character, foundUser, rollDice, rollBonus }) => {
+  const navigate = useNavigate()
   async function handleDelete() {
     axios
       .delete(`${process.env.REACT_APP_backendURI}/characters/${character._id}`)
       .then()
+      navigate("/")
   }
 
   async function handleCopy() {
@@ -26,7 +29,9 @@ const Statblock = ({ character, foundUser }) => {
 
   return (
     <div>
+      <Link to={`/characters/${character._id}`}>
       <h1>{character.name}</h1>
+      </Link>
       <h2>
         medium {character.race}, {character.alignment}
       </h2>

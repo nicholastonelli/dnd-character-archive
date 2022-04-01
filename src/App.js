@@ -27,14 +27,13 @@ function App() {
   const [users, setUsers] = useState()
   const [foundUser, setFoundUser] = useState()
 
-  // These states allow for a random dice roll on numbers attached to characters. State is passed down to the needed 
+  // These states allow for a random dice roll on numbers attached to characters. State is passed down to the needed
   const [rollBonus, setRollBonus] = useState(0)
-  const [chatState, setChatState] = useState([])
+  const [chatState, setChatState] = useState({})
 
   function rollDice(dice, rollBonus) {
-    let result = ((Math.floor(Math.random() * dice) + 1) + rollBonus)
-    setChatState(...chatState, result)
-    console.log(chatState)
+    //console.log(`Rolling 1d${dice} plus ${rollBonus}`)
+    let result = Math.floor(Math.random() * dice) + 1 + rollBonus
     return result
   }
 
@@ -45,9 +44,11 @@ function App() {
     axios.get(`${process.env.REACT_APP_backendURI}/users`).then((res) => {
       setUsers(res.data)
     })
-    axios.get(`${process.env.REACT_APP_backendURI}/baseCharacters`).then((res) => {
-      setBaseCharacters(res.data)
-    })
+    axios
+      .get(`${process.env.REACT_APP_backendURI}/baseCharacters`)
+      .then((res) => {
+        setBaseCharacters(res.data)
+      })
   }
 
   useEffect(() => {
@@ -82,6 +83,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Homepage />} />
+
           <Route
             path="/characters"
             element={<CharacterSheets characters={characters} />}
@@ -103,14 +105,42 @@ function App() {
                 setFoundUser={setFoundUser}
                 foundUser={foundUser}
                 users={users}
+                rollBonus={rollBonus}
+                rollDice={rollDice}
               />
             }
           />
           <Route path="/register" element={<Register addUsers={addUsers} />} />
-          <Route path="/new" element={<New user={user} setBaseCharacters={setBaseCharacters} baseCharacters={baseCharacters}/>} />
-          <Route path="/search" element={<Search baseCharacters={baseCharacters}/>} />
-          <Route path="/characters/:id" element={<CharacterStaging />}/>
-          <Route path="/baseCharacters/:id" element={<BaseCharacterStaging />}/>
+
+          <Route
+            path="/new"
+            element={
+              user ? (
+                <New
+                  user={user}
+                  setBaseCharacters={setBaseCharacters}
+                  baseCharacters={baseCharacters}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+
+          <Route
+            path="/search"
+            element={<Search baseCharacters={baseCharacters} />}
+          />
+
+          <Route
+            path="/characters/:id"
+            element={user ? <CharacterStaging user={user}/> : <Navigate to="/login" />}
+          />
+
+          <Route
+            path="/baseCharacters/:id"
+            element={user ? <BaseCharacterStaging user={user}/> : <Navigate to="/login" />}
+          />
         </Routes>
         {/* <Chatbar
           rollBonus={rollBonus}
