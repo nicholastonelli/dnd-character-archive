@@ -3,6 +3,7 @@ import { useParams } from "react-router"
 import axios from "axios"
 import Fullpage from "../Fullpage/Fullpage"
 import { Navigate, useNavigate } from "react-router-dom"
+import UploadImage from "../UploadImage/UploadImage"
 
 // The Character Staging Component uses Params to find a character before passing to another component
 
@@ -19,6 +20,7 @@ const CharacterStaging = ({ user }) => {
     experiencePoints: "",
     background: "",
     alignment: "",
+    image: "",
   }
 
   const initialAbility = {
@@ -32,8 +34,6 @@ const CharacterStaging = ({ user }) => {
 
   const [formAbility, setFormAbility] = useState(initialAbility)
   const [formState, setFormState] = useState(initialState)
-  
-
   let id = useParams()
 
   function getCharacter() {
@@ -42,15 +42,11 @@ const CharacterStaging = ({ user }) => {
       .then((res) => {
         setFoundCharacter(res.data)
         console.log(res.data.abilities)
-        setFormAbility(res.data.abilities)
-        console.log(formAbility)
       })
   }
 
   function saveCharacter() {
-    setFormState(formAbility)
     console.log("Saving Character")
-    console.log(formState)
     axios
       .put(`${process.env.REACT_APP_backendURI}/characters/${id.id}`, formState)
       .then((res) => {
@@ -67,6 +63,10 @@ const CharacterStaging = ({ user }) => {
   if (foundCharacter) {
     return (
       <div>
+        {foundCharacter.image 
+        ? <div className="image">Hey there's an image on this</div> 
+        : null
+        }
         <Fullpage
           character={foundCharacter}
           formState={formState}
@@ -74,6 +74,9 @@ const CharacterStaging = ({ user }) => {
           formAbility={formAbility}
           setFormAbility={setFormAbility}
         />
+        <UploadImage character={foundCharacter}
+          formState={formState}
+          setFormState={setFormState}/>
         <button onClick={saveCharacter}>Save Changes</button>
       </div>
     )
