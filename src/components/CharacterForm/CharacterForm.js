@@ -101,7 +101,19 @@ const CharacterForm = ({ user, setBaseCharacters, baseCharacters }) => {
   }
 
   const handleChange = (event) => {
-    setFormState({ ...formState, [event.target.id]: event.target.value })
+    if (event.target.type === "number") {
+      setFormState({
+        ...formState,
+        [event.target.id]: parseInt(event.target.value),
+      })
+    } else if (event.target.type === "text") {
+      setFormState({ ...formState, [event.target.id]: event.target.value })
+    } else if (event.target.type === "checkbox") {
+      setFormState({
+        ...formState,
+        [event.target.id]: event.target.checked !== false,
+      })
+    }
   }
 
   useEffect(()=>{
