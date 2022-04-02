@@ -194,7 +194,7 @@ const CharacterStaging = ({ user }) => {
       }
     )
     let character = await response.json()
-    //navigate("/")
+    navigate("/")
   }
 
   useEffect(() => {
