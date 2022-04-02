@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
+import AttackBox from "../AttackBox/AttackBox"
+import FeaturesAndTraits from "../FeaturesAndTraits/FeaturesAndTraits"
+import ACBox from "./ACBox/ACBox"
 import "./Fullpage.css"
 
 const Fullpage = ({ character, formState, setFormState }) => {
@@ -100,6 +103,24 @@ const Fullpage = ({ character, formState, setFormState }) => {
     survivalProf: character.skills.survival.proficiency,
     survivalExpe: character.skills.survival.expertise,
     survivalMisc: character.skills.survival.misc,
+
+    armorClass: character.armorClass.baseArmor,
+    shieldBonus: character.armorClass.shieldBonus,
+    armorMiscBonus: character.armorClass.miscBonus,
+
+    speed: character.speed,
+
+    hitPointMax: character.hitPoints.max,
+    hitPoints: character.hitPoints.current,
+    tempHitPoints: character.hitPoints.temp,
+
+    hitDie: character.hitDice.die,
+    currentHitDie: character.hitDice.current,
+
+    deathSuccs: character.deathSaves.successes,
+    deathFails: character.deathSaves.failures,
+
+    featuresAndTraits: character.featuresAndTraits,
   }
 
   const handleChange = (event) => {
@@ -1133,6 +1154,13 @@ const Fullpage = ({ character, formState, setFormState }) => {
               />
             </div>
           </div>
+        </div>
+        <div className="column4">
+          <ACBox formState={formState} setFormState={setFormState} handleChange={handleChange} dexMod={dexMod}/>
+          <AttackBox formState={formState} setFormState={setFormState} handleChange={handleChange} />
+        </div>
+        <div className="column5">
+          <FeaturesAndTraits formState={formState} setFormState={setFormState} handleChange={handleChange}/>
         </div>
       </div>
     </div>

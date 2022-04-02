@@ -164,6 +164,26 @@ const CharacterStaging = ({ user }) => {
             },
             
           },
+          armorClass: {
+            baseArmor: formState.armorClass,
+            shieldBonus: formState.shieldBonus,
+            miscBonus: formState.armorMiscBonus,
+          },
+          speed: formState.speed,
+          hitPoints:{
+            max: formState.hitPointMax,
+            current: formState.hitPoints,
+            temp: formState.tempHitPoints
+          },
+          hitDice:{
+            die: formState.hitDie,
+            current: formState.currentHitDie
+          },
+          deathSaves: {
+            successes: formState.deathSuccs,
+            failures: formState.deathFails
+          },
+          featuresAndTraits: formState.featuresAndTraits,
           userId: user._id,
           user: user,
           image: uploadedImageUrl,

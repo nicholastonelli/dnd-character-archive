@@ -1,0 +1,19 @@
+.ACContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.ACTop {
+    display: flex;
+    flex-direction: row;
+}
+
+.ACBottom {
+    display: flex;
+    flex-direction: row;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+}
