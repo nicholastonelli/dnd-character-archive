@@ -62,7 +62,7 @@ const UploadImage = ({ character, formState, setFormState, uploadedImageUrl, set
       </button>
     </form>
     {previewSource && (
-      <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
+      <img src={previewSource} alt="chosen" style={{ height: "300px", width:"300px" }} />
     )}
   </div>
   )
