@@ -39,8 +39,6 @@ const CharacterStaging = ({ user }) => {
   }
 
   async function saveCharacter() {
-    console.log("Saving Character")
-    console.log(formState)
     let response = await fetch(
       `${process.env.REACT_APP_backendURI}/characters/${id.id}`,
       {
@@ -201,7 +199,6 @@ const CharacterStaging = ({ user }) => {
     getCharacter()
   }, [])
 
-  //console.log(foundCharacter)
   if (foundCharacter) {
     return (
       <div>

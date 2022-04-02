@@ -6,8 +6,6 @@ import ACBox from "./ACBox/ACBox"
 import "./Fullpage.css"
 
 const Fullpage = ({ character, formState, setFormState }) => {
-  //console.log(character)
-  //console.log(formState)
 
   const characterState = {
     name: character.name,
